@@ -1,0 +1,3 @@
+[submodule "static/quiver"]
+	path = static/quiver
+	url = https://github.com/enjoysmath/quiver.git

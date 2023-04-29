@@ -1,0 +1,17 @@
+django
+django
+django-bootstrap-v5
+gunicorn
+django-heroku
+requests
+neomodel
+django-neomodel
+dj-database-url
+whitenoise
+psycopg2
+djangorestframework
+django-crispy-forms
+django-password-reset
+cloudinary
+bidict
+

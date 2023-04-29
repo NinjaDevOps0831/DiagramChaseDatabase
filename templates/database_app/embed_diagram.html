@@ -1,0 +1,59 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport"/>
+  <title>
+   DiagramChaseDatabase
+  </title>
+  <link href='{% static "bootstrap/css/bootstrap.min.css" %}' rel="stylesheet"/>
+  <link href='{% static "css/Articles-Cards-images.css" %}' rel="stylesheet"/>
+  <link href='{% static "css/styles.css" %}' rel="stylesheet"/>
+  <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/katex@0.16.6/dist/katex.min.css" integrity="sha384-mXD7x5S50Ko38scHSnD4egvoExgMPbrseZorkbE49evAfv9nNcbrXJ8LLNsDgh9d" rel="stylesheet"/>
+  <script crossorigin="anonymous" defer="" integrity="sha384-j/ZricySXBnNMJy9meJCtyXTKMhIJ42heyr7oAdxTDBy/CYA9hzpMo+YTNV5C+1X" src="https://cdn.jsdelivr.net/npm/katex@0.16.6/dist/katex.min.js">
+  </script>
+  <script crossorigin="anonymous" defer="" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" src="https://cdn.jsdelivr.net/npm/katex@0.16.6/dist/contrib/auto-render.min.js">
+  </script>
+ </head>
+ <body>
+  <h3 style="padding: 4px;text-align: center;">
+   {% if user.is_authenticated %}
+   <a class="d-inline-block float-start btn btn-primary" href="{% url 'diagram_editor' diagram.uid %}" style='background: url({% static "img/edit-icon.png" %}) center / cover no-repeat;height: 32px;width: 32px;padding: 0;margin-right: 20px;'>
+   </a>
+   {% endif %}
+   <iframe class="quiver-embed" height="auto" scrolling="no" src="{% static diagram.embed_data %}" style="border-radius: 8px;border: none;overflow: visible;" width="auto">
+   </iframe>
+   {{ diagram.name }}
+  </h3>
+  <p>
+   Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.
+  </p>
+  <div class="card">
+   <div class="card-body">
+    <h4 class="card-title">
+     Title
+    </h4>
+    <h6 class="text-muted card-subtitle mb-2">
+     Subtitle
+    </h6>
+    <p class="card-text">
+     Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.
+    </p>
+    <a class="card-link" href='{% static "#" %}'>
+     Link
+    </a>
+    <a class="card-link" href='{% static "#" %}'>
+     Link
+    </a>
+   </div>
+  </div>
+  <script src='{% static "js/jquery.min.js" %}'>
+  </script>
+  <script src='{% static "bootstrap/js/bootstrap.min.js" %}'>
+  </script>
+  <script src='{% static "js/bs-init.js" %}'>
+  </script>
+ </body>
+</html>

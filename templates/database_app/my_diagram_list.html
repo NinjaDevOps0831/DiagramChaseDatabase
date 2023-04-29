@@ -1,0 +1,169 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport"/>
+  <title>
+   DiagramChaseDatabase
+  </title>
+  <link href='{% static "bootstrap/css/bootstrap.min.css" %}' rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap" rel="stylesheet"/>
+  <link href='{% static "css/animate.min.css" %}' rel="stylesheet"/>
+  <link href='{% static "css/Articles-Cards-images.css" %}' rel="stylesheet"/>
+  <link href='{% static "css/Editable-Text.css" %}' rel="stylesheet"/>
+  <link href='{% static "css/Navbar-Centered-Brand-Dark-icons.css" %}' rel="stylesheet"/>
+  <link href='{% static "css/styles.css" %}' rel="stylesheet"/>
+  <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/katex@0.16.6/dist/katex.min.css" integrity="sha384-mXD7x5S50Ko38scHSnD4egvoExgMPbrseZorkbE49evAfv9nNcbrXJ8LLNsDgh9d" rel="stylesheet"/>
+  <script crossorigin="anonymous" defer="" integrity="sha384-j/ZricySXBnNMJy9meJCtyXTKMhIJ42heyr7oAdxTDBy/CYA9hzpMo+YTNV5C+1X" src="https://cdn.jsdelivr.net/npm/katex@0.16.6/dist/katex.min.js">
+  </script>
+  <script crossorigin="anonymous" defer="" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" src="https://cdn.jsdelivr.net/npm/katex@0.16.6/dist/contrib/auto-render.min.js">
+  </script>
+ </head>
+ <body style="background: #fcff68;">
+  <nav class="navbar navbar-dark navbar-expand-md bg-dark py-1">
+   <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="/">
+     <span class="bounce animated" style="color: var(--bs-cyan);font-family: 'Indie Flower', serif;font-size: 30px;">
+      Diagram Chase Database
+     </span>
+    </a>
+    <button class="navbar-toggler" data-bs-target="#navcol-6" data-bs-toggle="collapse">
+     <span class="visually-hidden">
+      Toggle navigation
+     </span>
+     <span class="navbar-toggler-icon">
+     </span>
+    </button>
+    <div class="collapse navbar-collapse flex-grow-0 order-md-first" id="navcol-6">
+     <ul class="navbar-nav me-auto">
+      <li class="nav-item">
+       <a class="nav-link active" href="https://github.com/enjoysmath/DiagramChaseDatabase">
+        Source Code
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link active" href="https://github.com/enjoysmath/DiagramChaseDatabase/issues">
+        Report Bugs
+       </a>
+      </li>
+     </ul>
+     <div class="d-md-none my-2">
+      {% if user.is_authenticated %}
+      <a class="btn btn-light me-2" href='{% url "logout" %}' role="button">
+       Log Out
+      </a>
+      {% endif %}
+      {% if not user.is_authenticated %}
+      <a class="btn btn-primary" href='{% url "login" %}' role="button">
+       Log In
+      </a>
+      {% endif %}
+     </div>
+    </div>
+    <div class="d-none d-md-block">
+     {% if user.is_authenticated %}
+     <a class="btn btn-light me-2" href='{% url "logout" %}' role="button">
+      Log Out
+     </a>
+     {% endif %}
+     {% if not user.is_authenticated %}
+     <a class="btn btn-primary" href='{% url "login" %}' role="button">
+      Log In
+     </a>
+     {% endif %}
+    </div>
+   </div>
+  </nav>
+  {% load bootstrap5 %}
+{% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
+  <h1 class="text-center" style="margin-left: 14px;">
+   {{user.username}}'s diagrams:
+  </h1>
+  <div class="container d-flex flex-row justify-content-evenly flex-wrap align-items-md-center">
+   <div class="dropdown" style="margin: 4px;">
+    <button aria-expanded="false" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" style="height: 38px;" type="button">
+     Order by {{ order_by_text }}
+    </button>
+    <div class="dropdown-menu">
+     {% if order_by != 'created' %}
+     <a class="dropdown-item" href="{% url 'my_diagram_list' 'created' order_dir 0 %}">
+      Order by date created
+     </a>
+     {% endif %}
+     {% if order_by != 'modified' %}
+     <a class="dropdown-item" href="{% url 'my_diagram_list' 'modified' order_dir 0 %}">
+      Order by date modified
+     </a>
+     {% endif %}
+     {% if order_by != 'name' %}
+     <a class="dropdown-item" href="{% url 'my_diagram_list' 'name' order_dir 0 %}">
+      Order by name
+     </a>
+     {% endif %}
+    </div>
+   </div>
+   <div class="dropdown" style="margin: 4px;">
+    <button aria-expanded="false" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" style="height: 38px;" type="button">
+     {{ order_dir_text }} direction
+    </button>
+    <div class="dropdown-menu">
+     {% if order_dir == 'desc' %}
+     <a class="dropdown-item" href="{% url 'my_diagram_list' order_by 'asc' page_num %}">
+      Ascending direction
+     </a>
+     {% endif %}
+     {% if order_dir == 'asc' %}
+     <a class="dropdown-item" href="{% url 'my_diagram_list' order_by 'desc' page_num %}">
+      Descending direction
+     </a>
+     {% endif %}
+    </div>
+   </div>
+   {% if prev_page > -1 %}
+   <a class="d-md-flex d-lg-flex align-items-md-center align-items-lg-center btn btn-primary" href="{% url 'my_diagram_list' order_by order_dir prev_page %}" style="text-align: center;height: 38px;">
+    Previous
+   </a>
+   {% endif %}
+   {% if next_page < num_pages %}
+   <a class="d-lg-flex align-items-lg-center btn btn-primary" href="{% url 'my_diagram_list' order_by order_dir next_page %}" style="height: 38px;">
+    Next
+   </a>
+   {% endif %}
+  </div>
+  <div class="container d-flex flex-row flex-grow-1 flex-fill justify-content-start flex-wrap align-items-xl-start" style="width: 100%;height: auto;padding-left: 0px;margin: 0px;margin-left: 6px;margin-right: 0px;padding-right: 0px;max-width: 100%;margin-top: 16px;">
+   {% for diagram in diagrams %}
+   <a href="{% url 'diagram_editor' diagram.uid %}" style="margin: 12px;text-decoration: none;">
+    <div class="card" style="border-radius: 12px;margin: 0px;border-width: 2px;border-color: var(--bs-info);width: 100%;height: auto;min-height: 300px;">
+     <div class="card-body">
+      <h3 class="d-xxl-flex flex-row-reverse flex-grow-1 flex-shrink-1 flex-fill justify-content-between align-items-stretch align-content-around align-self-center flex-wrap justify-content-xxl-center align-items-xxl-center card-title" dj-ref="diagram.name" style="padding: 4px;text-align: center;width: 100%;">
+       <img class="diagram-edit-icon" src='{% static "img/edit-icon.png" %}'/>
+       {{ diagram.name }}
+      </h3>
+      <iframe class="quiver-embed" height="350px" scrolling="no" src="{% static 'quiver/src/index.html' %}?q={{ diagram.embed_data }}&embed" style="border: none;overflow: scroll;display: block;" width="100%">
+      </iframe>
+      <p class="card-text">
+       Category: {{ diagram.category_name }}
+       <br/>
+       Modified: {{ diagram.date_modified }}
+       <br/>
+       Created: {{ diagram.date_created }}
+       <br/>
+       Author: {{ user.username }}
+      </p>
+     </div>
+    </div>
+   </a>
+   {% endfor %}
+  </div>
+  <script src='{% static "js/jquery.min.js" %}'>
+  </script>
+  <script src='{% static "bootstrap/js/bootstrap.min.js" %}'>
+  </script>
+  <script src='{% static "js/bs-init.js" %}'>
+  </script>
+  <script src='{% static "js/django_messages.js" %}'>
+  </script>
+ </body>
+</html>

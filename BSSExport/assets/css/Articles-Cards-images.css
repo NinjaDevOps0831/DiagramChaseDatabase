@@ -1,0 +1,27 @@
+.fit-cover {
+  object-fit: cover;
+}
+
+.card:hover > .card-title > img {
+  opacity: 1;
+}
+
+.diagram-edit-icon {
+  opacity: 0;
+}
+
+.card-body:hover .diagram-edit-icon {
+  opacity: 1;
+}
+
+h5 {
+}
+
+#diagram-name:hover button {
+  opacity: 1;
+}
+
+#diagram-name button {
+  opacity: 0;
+}
+

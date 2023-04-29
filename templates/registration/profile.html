@@ -1,0 +1,85 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport"/>
+  <title>
+   DiagramChaseDatabase
+  </title>
+  <link href='{% static "bootstrap/css/bootstrap.min.css" %}' rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap" rel="stylesheet"/>
+  <link href='{% static "css/animate.min.css" %}' rel="stylesheet"/>
+  <link href='{% static "css/Articles-Cards-images.css" %}' rel="stylesheet"/>
+  <link href='{% static "css/Editable-Text.css" %}' rel="stylesheet"/>
+  <link href='{% static "css/Navbar-Centered-Brand-Dark-icons.css" %}' rel="stylesheet"/>
+  <link href='{% static "css/styles.css" %}' rel="stylesheet"/>
+  <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/katex@0.16.6/dist/katex.min.css" integrity="sha384-mXD7x5S50Ko38scHSnD4egvoExgMPbrseZorkbE49evAfv9nNcbrXJ8LLNsDgh9d" rel="stylesheet"/>
+  <script crossorigin="anonymous" defer="" integrity="sha384-j/ZricySXBnNMJy9meJCtyXTKMhIJ42heyr7oAdxTDBy/CYA9hzpMo+YTNV5C+1X" src="https://cdn.jsdelivr.net/npm/katex@0.16.6/dist/katex.min.js">
+  </script>
+  <script crossorigin="anonymous" defer="" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" src="https://cdn.jsdelivr.net/npm/katex@0.16.6/dist/contrib/auto-render.min.js">
+  </script>
+ </head>
+ <body>
+  <nav class="navbar navbar-dark navbar-expand-md bg-dark py-1">
+   <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="/">
+     <span class="bounce animated" style="color: var(--bs-cyan);font-family: 'Indie Flower', serif;font-size: 30px;">
+      Diagram Chase Database
+     </span>
+    </a>
+    <button class="navbar-toggler" data-bs-target="#navcol-6" data-bs-toggle="collapse">
+     <span class="visually-hidden">
+      Toggle navigation
+     </span>
+     <span class="navbar-toggler-icon">
+     </span>
+    </button>
+    <div class="collapse navbar-collapse flex-grow-0 order-md-first" id="navcol-6">
+     <ul class="navbar-nav me-auto">
+      <li class="nav-item">
+       <a class="nav-link active" href="https://github.com/enjoysmath/DiagramChaseDatabase">
+        Source Code
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link active" href="https://github.com/enjoysmath/DiagramChaseDatabase/issues">
+        Report Bugs
+       </a>
+      </li>
+     </ul>
+     <div class="d-md-none my-2">
+      {% if user.is_authenticated %}
+      <a class="btn btn-light me-2" href='{% url "logout" %}' role="button">
+       Log Out
+      </a>
+      {% endif %}
+     </div>
+    </div>
+    <div class="d-none d-md-block">
+     {% if user.is_authenticated %}
+     <a class="btn btn-light me-2" href='{% url "logout" %}' role="button">
+      Log Out
+     </a>
+     {% endif %}
+    </div>
+   </div>
+  </nav>
+  <div class="container" style="padding-top: 25px;">
+   {% if user.is_authenticated %}
+   <a class="btn btn-primary" href='{% static "diagram_editor.html" %}'>
+    My Diagrams
+   </a>
+   {% endif %}
+  </div>
+  <script src='{% static "js/jquery.min.js" %}'>
+  </script>
+  <script src='{% static "bootstrap/js/bootstrap.min.js" %}'>
+  </script>
+  <script src='{% static "js/bs-init.js" %}'>
+  </script>
+  <script src='{% static "js/django_messages.js" %}'>
+  </script>
+ </body>
+</html>

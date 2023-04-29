@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>DiagramChaseDatabase</title>
+    <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Indie+Flower&amp;display=swap">
+    <link rel="stylesheet" href="/assets/css/animate.min.css">
+    <link rel="stylesheet" href="/assets/css/Articles-Cards-images.css">
+    <link rel="stylesheet" href="/assets/css/Editable-Text.css">
+    <link rel="stylesheet" href="/assets/css/Navbar-Centered-Brand-Dark-icons.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.6/dist/katex.min.css" integrity="sha384-mXD7x5S50Ko38scHSnD4egvoExgMPbrseZorkbE49evAfv9nNcbrXJ8LLNsDgh9d" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.6/dist/katex.min.js" integrity="sha384-j/ZricySXBnNMJy9meJCtyXTKMhIJ42heyr7oAdxTDBy/CYA9hzpMo+YTNV5C+1X" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.6/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+</head>
+
+<body style="background: #fcff68;">
+    <nav class="navbar navbar-dark navbar-expand-md bg-dark py-1">
+        <div class="container"><a class="navbar-brand d-flex align-items-center" href="/"><span class="bounce animated" style="color: var(--bs-cyan);font-family: 'Indie Flower', serif;font-size: 30px;">Diagram Chase Database</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-6"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse flex-grow-0 order-md-first" id="navcol-6">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link active" href="https://github.com/enjoysmath/DiagramChaseDatabase">Source Code</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="https://github.com/enjoysmath/DiagramChaseDatabase/issues">Report Bugs</a></li>
+                </ul>
+                <div class="d-md-none my-2"><a class="btn btn-light me-2" role="button" href="/registration/logout.html" dj-if="user.is_authenticated">Log Out</a><a class="btn btn-primary" role="button" href="/registration/login.html" dj-if="not user.is_authenticated">Log In</a></div>
+            </div>
+            <div class="d-none d-md-block"><a class="btn btn-light me-2" role="button" href="/registration/logout.html" dj-if="user.is_authenticated">Log Out</a><a class="btn btn-primary" role="button" href="/registration/login.html" dj-if="not user.is_authenticated">Log In</a></div>
+        </div>
+    </nav>{% load bootstrap5 %}
+{% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
+    <div class="container" style="padding-top: 25px;"><a class="btn btn-primary" href="/database_app/new_diagram.html" dj-if="user.is_authenticated">New Diagram</a><a class="btn btn-primary" href="{% url 'my_diagram_list' 'created' 'asc' 0 %}" dj-if="user.is_authenticated" style="margin-left: 8px;">My Diagrams</a></div>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/js/bs-init.js"></script>
+    <script src="/assets/js/django_messages.js"></script>
+</body>
+
+</html>

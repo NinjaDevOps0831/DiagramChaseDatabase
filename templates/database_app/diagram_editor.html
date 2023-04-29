@@ -1,0 +1,240 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport"/>
+  <title>
+   DiagramChaseDatabase
+  </title>
+  <link href='{% static "bootstrap/css/bootstrap.min.css" %}' rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap" rel="stylesheet"/>
+  <link href='{% static "css/animate.min.css" %}' rel="stylesheet"/>
+  <link href='{% static "css/Articles-Cards-images.css" %}' rel="stylesheet"/>
+  <link href='{% static "css/Editable-Text.css" %}' rel="stylesheet"/>
+  <link href='{% static "css/Navbar-Centered-Brand-Dark-icons.css" %}' rel="stylesheet"/>
+  <link href='{% static "css/styles.css" %}' rel="stylesheet"/>
+  <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/katex@0.16.6/dist/katex.min.css" integrity="sha384-mXD7x5S50Ko38scHSnD4egvoExgMPbrseZorkbE49evAfv9nNcbrXJ8LLNsDgh9d" rel="stylesheet"/>
+  <script crossorigin="anonymous" defer="" integrity="sha384-j/ZricySXBnNMJy9meJCtyXTKMhIJ42heyr7oAdxTDBy/CYA9hzpMo+YTNV5C+1X" src="https://cdn.jsdelivr.net/npm/katex@0.16.6/dist/katex.min.js">
+  </script>
+  <script crossorigin="anonymous" defer="" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" src="https://cdn.jsdelivr.net/npm/katex@0.16.6/dist/contrib/auto-render.min.js">
+  </script>
+ </head>
+ <body style="background: var(--bs-body-bg);">
+  <nav class="navbar navbar-dark navbar-expand-md bg-dark py-1">
+   <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="/">
+     <span class="bounce animated" style="color: var(--bs-cyan);font-family: 'Indie Flower', serif;font-size: 30px;">
+      Diagram Chase Database
+     </span>
+    </a>
+    <button class="navbar-toggler" data-bs-target="#navcol-6" data-bs-toggle="collapse">
+     <span class="visually-hidden">
+      Toggle navigation
+     </span>
+     <span class="navbar-toggler-icon">
+     </span>
+    </button>
+    <div class="collapse navbar-collapse flex-grow-0 order-md-first" id="navcol-6">
+     <ul class="navbar-nav me-auto">
+      <li class="nav-item">
+       <a class="nav-link active" href="https://github.com/enjoysmath/DiagramChaseDatabase">
+        Source Code
+       </a>
+      </li>
+      <li class="nav-item">
+       <a class="nav-link active" href="https://github.com/enjoysmath/DiagramChaseDatabase/issues">
+        Report Bugs
+       </a>
+      </li>
+     </ul>
+     <div class="d-md-none my-2">
+      {% if user.is_authenticated %}
+      <a class="btn btn-light me-2" href='{% url "logout" %}' role="button">
+       Log Out
+      </a>
+      {% endif %}
+     </div>
+    </div>
+    <div class="d-none d-md-block">
+     {% if user.is_authenticated %}
+     <a class="btn btn-light me-2" href='{% url "logout" %}' role="button">
+      Log Out
+     </a>
+     {% endif %}
+    </div>
+   </div>
+  </nav>
+  {% load bootstrap5 %}
+  <script type="text/javascript">
+   document.addEventListener('DOMContentLoaded', ()=> {
+        djangoMessagesDiv = "#django-messages";
+        djangoMessagesURL = "{% url 'messages' %}";
+    });
+  </script>
+  <div id="django-messages" style="z-index: 1;">
+   {% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
+  </div>
+  <div class="container d-inline-flex float-start d-lg-flex flex-row align-items-start flex-wrap justify-content-lg-center align-items-lg-center justify-content-xl-start align-items-xxl-center editable-text" style="width: 20%;height: auto;position: absolute;right: 0%;margin: 8px;">
+   <h5 style="z-index: 1;margin: 0;">
+    Category:
+   </h5>
+   <h5 id="category-name" style="display: block;text-align: center;z-index: 1;color: #6100ff;margin: 8px;">
+    {{ category_name }}
+   </h5>
+   <button class="btn btn-primary editable-text-button" data-bs-target="#category-name-modal" data-bs-toggle="modal" style='height: 32px;margin: 8px;width: 32px;background: url({% static "img/edit-icon.png" %}) -1px -1px / contain no-repeat, #00000000;z-index: 1;' type="button">
+   </button>
+   <div class="modal fade editable-text-modal" id="category-name-modal" role="dialog" style="margin-top: 10%;border-color: var(--bs-indigo);" tabindex="-1">
+    <div class="modal-dialog modal-lg" role="document">
+     <div class="modal-content">
+      <div class="modal-header flex-row flex-grow-1 flex-shrink-0 flex-fill justify-content-center align-items-center align-content-center align-self-stretch flex-wrap justify-content-xl-center align-items-xl-center" style="height: 46.4219px;border-style: none;background: #fcff68;text-align: center;padding-left: 0%;padding-right: 0%;margin: 0px;">
+       <h4 class="modal-title float-none" style="text-align: center;margin: 0;padding-right: 0px;padding-left: 0px;margin-left: 0px;margin-right: 10px;">
+        Reassign Diagram's Category
+       </h4>
+       <button aria-label="Close" class="btn-close text-end" data-bs-dismiss="modal" id="category-name-close-button" style="margin: 8px;position: absolute;right: 0.4%;" type="button">
+       </button>
+      </div>
+      <div class="modal-body d-md-flex justify-content-md-center" style="padding: 0px;height: auto;width: auto;border-style: none;background: #fcff68;">
+       <input class="form-control-lg d-md-flex justify-content-md-center align-items-md-center" id="category-name-input" placeholder="Enter a diagram name" style="width: 90%;height: 100%;padding: 0px;margin: 0;margin-right: 5%;margin-bottom: 0;text-align: center;margin-left: 5%;background: var(--bs-modal-bg);margin-top: 16px;color: var(--bs-blue);box-shadow: 0px 5px 20px 3px var(--bs-modal-border-color);border: 2px none var(--bs-blue);" type="text" value="{{ category_name }}"/>
+       <p>
+       </p>
+      </div>
+      <div class="modal-footer" style="height: 69px;padding: 0;padding-right: 8px;border-style: none;background: #fcff68;">
+       <button class="btn btn-primary" onclick="reassign_category();" type="button">
+        Save
+       </button>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div class="container d-inline-flex float-start d-lg-flex flex-row align-items-start flex-wrap justify-content-lg-center align-items-lg-center justify-content-xl-start editable-text" style="width: 20%;height: auto;position: absolute;margin: 8px;">
+   <h5 style="z-index: 1;margin: 0;">
+    Name:
+   </h5>
+   <h5 id="diagram-name" style="display: block;text-align: center;z-index: 1;color: #6100ff;margin: 8px;">
+    {{ diagram_name }}
+   </h5>
+   <button class="btn btn-primary editable-text-button" data-bs-target="#diagram-name-modal" data-bs-toggle="modal" style='height: 32px;margin: 8px;width: 32px;background: url({% static "img/edit-icon.png" %}) -1px -1px / contain no-repeat, #00000000;z-index: 1;' type="button">
+   </button>
+  </div>
+  <div class="modal fade editable-text-modal" id="diagram-name-modal" role="dialog" style="margin-top: 10%;border-color: var(--bs-indigo);" tabindex="-1">
+   <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+     <div class="modal-header flex-row flex-grow-1 flex-shrink-0 flex-fill justify-content-center align-items-center align-content-center align-self-stretch flex-wrap justify-content-xl-center align-items-xl-center" style="height: 46.4219px;border-style: none;background: #fcff68;text-align: center;padding-left: 0%;padding-right: 0%;margin: 0px;">
+      <h4 class="modal-title float-none" style="text-align: center;margin: 0;padding-right: 0px;padding-left: 0px;margin-left: 0px;margin-right: 10px;">
+       Rename Diagram
+      </h4>
+      <button aria-label="Close" class="btn-close text-end" data-bs-dismiss="modal" id="diagram-name-close-button" style="margin: 8px;position: absolute;right: 0.4%;" type="button">
+      </button>
+     </div>
+     <div class="modal-body d-md-flex justify-content-md-center" style="padding: 0px;height: auto;width: auto;border-style: none;background: #fcff68;">
+      <input class="form-control-lg d-md-flex justify-content-md-center align-items-md-center" id="diagram-name-input" placeholder="Enter a diagram name" style="width: 90%;height: 100%;padding: 0px;margin: 0;margin-right: 5%;margin-bottom: 0;text-align: center;margin-left: 5%;background: var(--bs-modal-bg);margin-top: 16px;color: var(--bs-blue);border: 2px none var(--bs-blue);box-shadow: 0px 5px 20px 3px var(--bs-modal-border-color);" type="text" value="{{ diagram_name }}"/>
+      <p>
+      </p>
+     </div>
+     <div class="modal-footer" style="height: 69px;padding: 0;padding-right: 8px;border-style: none;background: #fcff68;">
+      <button class="btn btn-primary" onclick="rename_diagram();" type="button">
+       Save
+      </button>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div class="offcanvas offcanvas-start" id="offcanvas-3" tabindex="-1">
+   <div class="offcanvas-header">
+    <h5 class="offcanvas-title">
+     Rename Diagram
+    </h5>
+    <button aria-label="Close" class="btn-close" data-bs-dismiss="offcanvas" type="button">
+    </button>
+   </div>
+   <div class="offcanvas-body">
+    <form>
+     <input class="btn btn-primary" type="submit"/>
+    </form>
+   </div>
+  </div>
+  <div class="offcanvas offcanvas-start" id="offcanvas-2" tabindex="-1">
+   <div class="offcanvas-header">
+    <h5 class="offcanvas-title">
+     Take Functorial Image
+    </h5>
+    <button aria-label="Close" class="btn-close" data-bs-dismiss="offcanvas" type="button">
+    </button>
+   </div>
+   <div class="offcanvas-body">
+    <div class="container">
+     <form action="{% url 'functor_diagram' diagram_id %}" method="post">
+      {% csrf_token %}
+      <input class="form-control-plaintext" readonly="" type="text" value="Notation:"/>
+      <input class="form-control" name="functor_notation" placeholder="Use \cdot to indicate where the argument goes" type="text" value="F(\cdot)"/>
+      <input class="form-control-plaintext" readonly="" type="text" value="Into Category:"/>
+      <input class="form-control" name="functor_codomain" placeholder="Use \cdot to indicate where the argument goes" type="text" value="C"/>
+      <input class="btn btn-primary" style="margin: 12px;margin-left: 0px;" type="submit" value="Functor"/>
+     </form>
+    </div>
+   </div>
+  </div>
+  <div class="offcanvas offcanvas-start" id="offcanvas-1" tabindex="-1">
+   <div class="offcanvas-header bounce animated">
+    <h5 class="offcanvas-title bounce animated">
+     Math
+    </h5>
+    <button aria-label="Close" class="btn-close" data-bs-dismiss="offcanvas" type="button">
+    </button>
+   </div>
+   <div class="offcanvas-body">
+    <p>
+     Offcanvas Paragraph
+    </p>
+    <button class="btn btn-primary" data-bs-dismiss="offcanvas" type="button">
+     Close
+    </button>
+   </div>
+  </div>
+  <div class="container-fluid" style="padding: 0;">
+   <div class="d-grid d-xxl-flex justify-content-start align-items-start align-content-start align-self-start flex-wrap align-items-xxl-center" style="bottom: 2%;position: absolute;display: flex;overflow: visible;width: 100%;margin-left: 8px;z-index: 1;">
+    <div class="btn-group" role="group">
+     <button class="btn btn-primary" data-bs-target="#offcanvas-1" data-bs-toggle="offcanvas" type="button">
+      Math
+     </button>
+     <button class="btn btn-primary" data-bs-target="#offcanvas-2" data-bs-toggle="offcanvas" type="button">
+      Functor
+     </button>
+     <button class="btn btn-primary" id="save-button" onclick="save_diagram_to_database();" type="button">
+      Save
+     </button>
+    </div>
+   </div>
+   <iframe id="quiver-editor" src='{% static "quiver/src/index.html" %}' style="width: 99.5vw;height: 91.5vh;position: relative;display: flex;" title="Quiver Diagram Editor">
+   </iframe>
+  </div>
+  <script src='{% static "js/quiver_interface.js" %}'>
+  </script>
+  <script type="text/javascript">
+   csrfToken = "{{ csrf_token }}";
+    saveDiagramURL = "{% url 'save_diagram' diagram_id %}";
+    loadDiagramURL = "{% url 'load_diagram' diagram_id %}";
+    quiverIframe = "#quiver-editor";
+    diagramId = "{{ diagram_id }}";
+    diagramName = "{{ diagram_name }}";
+    renameDiagramURL = "{% url 'rename_diagram' diagram_id %}";
+    reassignCategoryURL = "{% url 'reassign_category' diagram_id %}";
+    categoryName = "{{ category_name }}";
+    
+    document.addEventListener('DOMContentLoaded', ()=> {
+        load_diagram_from_database();        
+    });
+  </script>
+  <script src='{% static "js/jquery.min.js" %}'>
+  </script>
+  <script src='{% static "bootstrap/js/bootstrap.min.js" %}'>
+  </script>
+  <script src='{% static "js/bs-init.js" %}'>
+  </script>
+  <script src='{% static "js/django_messages.js" %}'>
+  </script>
+ </body>
+</html>
